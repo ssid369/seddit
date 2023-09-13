@@ -1,8 +1,9 @@
 import SubscribeLeaveToggle from '@/components/SubscribeLeaveToggle';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { getAuthSession } from '@/lib/auth'
 import { db } from '@/lib/db';
 import format from 'date-fns/format';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { FC } from 'react'
 
@@ -87,6 +88,12 @@ const Layout =async ({
                                 <SubscribeLeaveToggle subredditId={subreddit.id} subredditName={subreddit.name} isSubscribed={isSubscribed}></SubscribeLeaveToggle>
                             </div>
                         ):null}
+                        <Link className={buttonVariants({
+                            variant:'outline',
+                            className:"w-full my-6"
+                        })}
+                        href={` ${slug}/submit/`}
+                        >Create Post</Link>
                     </dl>
                 
             </div>
