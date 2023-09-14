@@ -1,12 +1,11 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-Sample Images
-
-![Screenshot from 2023-09-14 21-05-35](https://github.com/ssid369/seddit/assets/79620604/5282fc1f-4948-4519-809f-a4724e50e30d)
-![Screenshot from 2023-09-14 21-05-50](https://github.com/ssid369/seddit/assets/79620604/08de35b1-3ff5-4a2d-abd8-6ffb10739bf9)
-![Screenshot from 2023-09-14 21-06-15](https://github.com/ssid369/seddit/assets/79620604/3cdc8018-b29f-4dd3-9dc7-49d492d7c80d)
-![Screenshot from 2023-09-14 21-06-23](https://github.com/ssid369/seddit/assets/79620604/232e1921-975d-410c-9c92-b628c8092c15)
-![Screenshot from 2023-09-14 21-06-40](https://github.com/ssid369/seddit/assets/79620604/5f51b7ed-e472-4c88-8811-9a6c28f540b8)
+Sample Images of the website
+![seddit1](https://github.com/ssid369/seddit/assets/79620604/8407cada-c8cb-4ec3-9883-fec4ae82f793)
+![seddit2](https://github.com/ssid369/seddit/assets/79620604/85681679-a040-4859-849e-3c448536eade)
+![seddit3](https://github.com/ssid369/seddit/assets/79620604/0e80f95b-fd9f-474e-b7bb-c7a81a8e2255)
+![seddit4](https://github.com/ssid369/seddit/assets/79620604/19230a28-dbda-40a6-b2e4-8ab714e6bad3)
+![seddit5](https://github.com/ssid369/seddit/assets/79620604/b2a6ff1b-1933-4353-99f6-3c6f4eaa615e)
 
 
 
