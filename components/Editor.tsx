@@ -41,6 +41,39 @@ const Editor: React.FC<EditorProps> = ({ subredditId }) => {
 
   const [isMounted, setIsMounted] = useState<boolean>(false)
   const ref = useRef<EditorJS>()
+  const pathname = usePathname()
+  const router = useRouter()
+  const _titleRef = useRef<HTMLTextAreaElement>(null)
+
+  const { mutate: createPost } = useMutation({
+    mutationFn: async ({
+      title,
+      content,
+      subredditId,
+    }: PostCreationRequest) => {
+      const payload: PostCreationRequest = { title, content, subredditId }
+      const { data } = await axios.post('/api/subreddit/post/create', payload)
+      return data
+    },
+    onError: () => {
+      return toast({
+        title: 'Something went wrong.',
+        description: 'Your post was not published. Please try again.',
+        variant: 'destructive',
+      })
+    },
+    onSuccess: () => {
+      // turn pathname /r/mycommunity/submit into /r/mycommunity
+      const newPathname = pathname.split('/').slice(0, -1).join('/')
+      router.push(newPathname)
+
+      router.refresh()
+
+      return toast({
+        description: 'Your post has been published.',
+      })
+    },
+  })
 
 
   const initializeEditor = useCallback(async () => {
@@ -121,6 +154,9 @@ const Editor: React.FC<EditorProps> = ({ subredditId }) => {
   useEffect(() => {
     const init = async () => {
       await initializeEditor()
+      setTimeout(() => {
+        _titleRef?.current?.focus()
+      }, 0)
     }
 
     if (isMounted) {
@@ -133,19 +169,38 @@ const Editor: React.FC<EditorProps> = ({ subredditId }) => {
     }
   }, [isMounted, initializeEditor])
 
+  async function onSubmit(data: FormData) {
+    const blocks = await ref.current?.save()
+
+    const payload: PostCreationRequest = {
+      title: data.title,
+      content: blocks,
+      subredditId,
+    }
+
+    createPost(payload)
+  }
+  
   const {ref:titleRef, ...rest}=register("title");
+
 
   return (
     <div className='w-full p-4 bg-zinc-50 rounded-lg border border-zinc-200'>
       <form
         id='subreddit-post-form'
         className='w-fit'
-        onSubmit={handleSubmit((e)=>{})}
+        onSubmit={handleSubmit(onSubmit)}
         >
         <div className='prose prose-stone dark:prose-invert'>
           <TextareaAutosize
-            placeholder='Title'
-            className='w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none'
+           ref={(e) => {
+            titleRef(e)
+            // @ts-ignore
+            _titleRef.current = e
+          }}
+          {...rest}
+          placeholder='Title'
+          className='w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none'
           />
           <div id='editor' className='min-h-[500px]' />
           <p className='text-sm text-gray-500'>
